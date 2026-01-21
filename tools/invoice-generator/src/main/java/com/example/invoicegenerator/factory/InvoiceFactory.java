@@ -1,8 +1,10 @@
 package com.example.invoicegenerator.factory;
 
+import com.example.invoicegenerator.GeneratorProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.List;
@@ -10,12 +12,13 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+@Component
 @RequiredArgsConstructor
 public class InvoiceFactory {
 
     private final Random rnd = new Random();
     private final ObjectMapper om;
-    private final int avgLines;
+    private final GeneratorProperties gp;
 
     private static final List<Double> VAT_RATES = List.of(0.23, 0.08, 0.05, 0.00);
 
@@ -32,7 +35,7 @@ public class InvoiceFactory {
     }
 
     private List<InvoiceLine> generateLines() {
-        int lineCount = Math.max(1, (int) Math.round(avgLines + rnd.nextGaussian()));
+        int lineCount = Math.max(1, (int) Math.round(gp.getAvgLines() + rnd.nextGaussian()));
         return Stream.generate(this::generateSingleLine)
                 .limit(lineCount)
                 .toList();

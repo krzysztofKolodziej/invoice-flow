@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties(Args.class)
+@EnableConfigurationProperties(GeneratorProperties.class)
 public class InvoiceGeneratorApplication {
     public static void main(String[] args) {
         SpringApplication.run(InvoiceGeneratorApplication.class, args);
