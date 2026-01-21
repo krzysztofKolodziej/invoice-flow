@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: invoice-generator
+  threads:
+    virtual:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics,prometheus"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+gen:
+  target: ${GEN_TARGET:http://localhost:8080}
+  rps: ${GEN_RPS:50}
+  duration-seconds: ${GEN_DURATION_SECONDS:30}
+  concurrency: ${GEN_CONCURRENCY:100}
+  customers: ${GEN_CUSTOMERS:200}
+  avg-lines: ${GEN_AVG_LINES:3}
+  timeout-ms: ${GEN_TIMEOUT_MS:5000}
