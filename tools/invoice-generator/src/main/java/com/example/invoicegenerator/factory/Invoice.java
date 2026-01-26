@@ -1,12 +1,14 @@
 package com.example.invoicegenerator.factory;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public record Invoice(
-        String invoiceId,
-        String customerId,
-        String currency,
-        String issuedAt,
-        List<InvoiceLine> lines
+        @JsonProperty("invoiceId") String invoiceId,
+        @JsonProperty("customerId") String customerId,
+        @JsonProperty("currency") String currency,
+        @JsonProperty("createdAt") String createdAt,
+        @JsonProperty("lines") List<InvoiceLine> lines
 ) {
 }

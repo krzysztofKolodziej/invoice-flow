@@ -1,12 +1,14 @@
 package com.example.invoiceapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public record Invoice(
-        String id,
-        String customerId,
-        String currency,
-        String createdAt,
-        List<InvoiceLine> lines
+        @JsonProperty("invoiceId") String invoiceId,
+        @JsonProperty("customerId") String customerId,
+        @JsonProperty("currency") String currency,
+        @JsonProperty("createdAt") String createdAt,
+        @JsonProperty("lines") List<InvoiceLine> lines
 ) {}
 

@@ -1,5 +1,6 @@
 package com.example.invoicegenerator;
 
+import com.example.invoicegenerator.factory.Invoice;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
@@ -25,7 +26,7 @@ public class InvoiceSender {
      * @param invoice the JSON representation of the invoice to send
      * @return the HTTP status code, or 0 if a network exception occurred
      */
-    public int send(JsonNode invoice) {
+    public int send(Invoice invoice) {
         try {
             int code = restClient.post()
                     .uri("/v1/invoices")

@@ -22,16 +22,14 @@ public class InvoiceFactory {
 
     private static final List<Double> VAT_RATES = List.of(0.23, 0.08, 0.05, 0.00);
 
-    public JsonNode newInvoice() {
-        Invoice invoice = new Invoice(
+    public Invoice newInvoice() {
+        return new Invoice(
                 "inv_" + UUID.randomUUID(),
                 "cus_" + UUID.randomUUID(),
                 "PLN",
                 Instant.now().toString(),
                 generateLines()
         );
-
-        return om.valueToTree(invoice);
     }
 
     private List<InvoiceLine> generateLines() {

@@ -1,5 +1,6 @@
 package com.example.invoicegenerator;
 
+import com.example.invoicegenerator.factory.Invoice;
 import com.example.invoicegenerator.factory.InvoiceFactory;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
@@ -84,7 +85,7 @@ public class LoadRunner implements ApplicationRunner {
     private void executeSingleRequest(Semaphore inFlight) {
         long startTime = System.currentTimeMillis();
         try {
-            JsonNode invoice = invoiceFactory.newInvoice();
+            Invoice invoice = invoiceFactory.newInvoice();
             int statusCode = invoiceSender.send(invoice);
 
             long duration = System.currentTimeMillis() - startTime;

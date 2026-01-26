@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 public class InvoiceIngestionService {
 
     private final KafkaTemplate<String, Invoice> kafkaTemplate;
-    private static final String TOPIC = "invoice-raw";
+    private static final String TOPIC = "invoices-raw";
 
     public void ingest(Invoice invoice) {
-        log.debug("Ingesting invoice: {}", invoice.id());
+        log.debug("Ingesting invoice: {}", invoice.invoiceId());
 
-        kafkaTemplate.send(TOPIC, invoice.id(), invoice)
+        kafkaTemplate.send(TOPIC, invoice.invoiceId(), invoice)
                 .whenComplete((result, ex) -> {
                     if (ex == null) {
-                        log.trace("Invoice {} sent to Kafka", invoice.id());
+                        log.trace("Invoice {} sent to Kafka", invoice.invoiceId());
                     } else {
                         log.error("Failed to send invoice to Kafka", ex);
                     }
