@@ -76,9 +76,9 @@ public class TrafficStats {
     }
 
     public long getOkCount() {
-        return Objects.requireNonNull(registry.find(Config.INVOICE_TIMER_NAME)
-                        .tag("status", "2xx")
-                        .timer())
-                .count();
+        var timer = registry.find(Config.INVOICE_TIMER_NAME)
+                .tag("status", "2xx")
+                .timer();
+        return (timer != null) ? timer.count() : 0L;
     }
 }

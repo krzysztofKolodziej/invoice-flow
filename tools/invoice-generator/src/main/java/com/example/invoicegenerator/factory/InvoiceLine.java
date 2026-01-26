@@ -1,9 +1,11 @@
 package com.example.invoicegenerator.factory;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public record InvoiceLine(
-        String sku,
-        int qty,
-        double net,
-        double vatRate
+        @JsonProperty("sku") String sku,
+        @JsonProperty("quantity") int quantity,
+        @JsonProperty("netPrice") double netPrice,
+        @JsonProperty("vatRate") double vatRate
 ) {
 }

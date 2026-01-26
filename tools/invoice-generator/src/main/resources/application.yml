@@ -22,3 +22,9 @@ gen:
   customers: ${GEN_CUSTOMERS:200}
   avg-lines: ${GEN_AVG_LINES:3}
   timeout-ms: ${GEN_TIMEOUT_MS:5000}
+
+kafka:
+  producer:
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.add.type.headers: false
