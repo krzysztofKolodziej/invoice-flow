@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: invoice-validator
+
+  kafka:
+    bootstrap-servers: localhost:9094
+    consumer:
+      group-id: validator-final-group-v11
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: com.example.invoicevalidator.dto.Invoice
+        spring.json.use.type.headers: false
+    producer:
+      bootstrap-servers: localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.value.default.type: com.example.invoicevalidator.dto.Invoice
+        spring.json.add.type.headers: false
+
+server:
+  port: 8082
