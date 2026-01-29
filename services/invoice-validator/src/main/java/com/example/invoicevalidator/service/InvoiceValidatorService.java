@@ -16,7 +16,7 @@ public class InvoiceValidatorService {
     private static final String INPUT_TOPIC = "invoices-raw";
     private static final String OUTPUT_TOPIC = "invoice-validated";
 
-    @KafkaListener(topics = INPUT_TOPIC, groupId = "validator-group-final-v1")
+    @KafkaListener(topics = INPUT_TOPIC, groupId = "validator-group-final-v11")
     public void process(Invoice invoice) {
         log.info("Receive invoice to validation: {}", invoice.invoiceId());
 
