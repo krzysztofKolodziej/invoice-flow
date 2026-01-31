@@ -14,5 +14,17 @@ spring:
         spring.json.value.default.type: com.example.invoiceapi.dto.Invoice
         spring.json.add.type.headers: false
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics,prometheus"
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 server:
-  port: 8080
+  port: 8083

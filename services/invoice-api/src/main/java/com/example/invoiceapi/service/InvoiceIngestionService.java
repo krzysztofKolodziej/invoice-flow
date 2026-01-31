@@ -15,15 +15,6 @@ public class InvoiceIngestionService {
     private static final String TOPIC = "invoices-raw";
 
     public void ingest(Invoice invoice) {
-        log.debug("Ingesting invoice: {}", invoice.invoiceId());
-
-        kafkaTemplate.send(TOPIC, invoice.invoiceId(), invoice)
-                .whenComplete((result, ex) -> {
-                    if (ex == null) {
-                        log.trace("Invoice {} sent to Kafka", invoice.invoiceId());
-                    } else {
-                        log.error("Failed to send invoice to Kafka", ex);
-                    }
-                });
+        kafkaTemplate.send(TOPIC, invoice.invoiceId(), invoice);
     }
 }
