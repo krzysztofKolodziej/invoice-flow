@@ -70,17 +70,21 @@ public class LoadRunner implements ApplicationRunner {
     }
 
     private ScheduledFuture<?> startTrafficGeneration(Semaphore inFlight) {
+        final int rps = props.getRps();
+        final int batchesPerSecond = 100;
+        final int batchSize = Math.max(1, rps / batchesPerSecond);
+
+        log.info("Generating traffic in batches of {} every 10ms", batchSize);
+
         return scheduler.scheduleAtFixedRate(() -> {
-            for (int i = 0; i < props.getRps(); i++) {
+            for (int i = 0; i < batchSize; i++) {
                 if (!inFlight.tryAcquire()) {
                     stats.markOtherError();
                     continue;
                 }
-
                 taskExecutor.execute(() -> executeSingleRequest(inFlight));
             }
-        }, 0, 1, TimeUnit.SECONDS);
-    }
+        }, 0, 1000 / batchesPerSecond, TimeUnit.MILLISECONDS);    }
 
     private void executeSingleRequest(Semaphore inFlight) {
         long startTime = System.currentTimeMillis();

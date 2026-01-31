@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @Setter
 public class GeneratorProperties {
-    private String target = "http://localhost:8080";
+    private String target = "http://localhost:8083";
     private int rps = 50;
     private int durationSeconds = 30;
     private int concurrency = 100;
